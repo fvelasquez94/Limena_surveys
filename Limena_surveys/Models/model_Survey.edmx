@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DLI_SurveyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ID_cliente" />
+          </Key>
+          <Property Name="ID_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSAP_cliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nomSAP_cliente" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="idSAP_vendedor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nomSAP_vendedor" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="Detalle_encuesta">
+          <Key>
+            <PropertyRef Name="ID_detalle" />
+          </Key>
+          <Property Name="ID_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seccion" Type="int" />
+          <Property Name="seccion_descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="ID_item" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion_item" Type="varchar" MaxLength="500" />
+          <Property Name="value_item_chk" Type="bit" />
+          <Property Name="idSAP_cliente" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Vendedores">
+          <Key>
+            <PropertyRef Name="ID_vendedor" />
+          </Key>
+          <Property Name="ID_vendedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idSAP_vendedor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nomSAP_vendedor" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DLI_SurveyModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_encuesta" EntityType="Self.Detalle_encuesta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendedores" EntityType="Self.Vendedores" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DLI_SurveyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DLI_SurveyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="DLI_SurveyModel.Clientes" />
+          <EntitySet Name="Detalle_encuesta" EntityType="DLI_SurveyModel.Detalle_encuesta" />
+          <EntitySet Name="Vendedores" EntityType="DLI_SurveyModel.Vendedores" />
+        </EntityContainer>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ID_cliente" />
+          </Key>
+          <Property Name="ID_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSAP_cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nomSAP_cliente" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="idSAP_vendedor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nomSAP_vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Detalle_encuesta">
+          <Key>
+            <PropertyRef Name="ID_detalle" />
+          </Key>
+          <Property Name="ID_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="seccion" Type="Int32" />
+          <Property Name="seccion_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ID_item" Type="String" />
+          <Property Name="descripcion_item" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="value_item_chk" Type="Boolean" />
+          <Property Name="idSAP_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Vendedores">
+          <Key>
+            <PropertyRef Name="ID_vendedor" />
+          </Key>
+          <Property Name="ID_vendedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="correo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idSAP_vendedor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nomSAP_vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DLI_SurveyModelStoreContainer" CdmEntityContainer="DLI_SurveyEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="DLI_SurveyModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nomSAP_vendedor" ColumnName="nomSAP_vendedor" />
+                <ScalarProperty Name="idSAP_vendedor" ColumnName="idSAP_vendedor" />
+                <ScalarProperty Name="nomSAP_cliente" ColumnName="nomSAP_cliente" />
+                <ScalarProperty Name="idSAP_cliente" ColumnName="idSAP_cliente" />
+                <ScalarProperty Name="ID_cliente" ColumnName="ID_cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_encuesta">
+            <EntityTypeMapping TypeName="DLI_SurveyModel.Detalle_encuesta">
+              <MappingFragment StoreEntitySet="Detalle_encuesta">
+                <ScalarProperty Name="idSAP_cliente" ColumnName="idSAP_cliente" />
+                <ScalarProperty Name="value_item_chk" ColumnName="value_item_chk" />
+                <ScalarProperty Name="descripcion_item" ColumnName="descripcion_item" />
+                <ScalarProperty Name="ID_item" ColumnName="ID_item" />
+                <ScalarProperty Name="seccion_descripcion" ColumnName="seccion_descripcion" />
+                <ScalarProperty Name="seccion" ColumnName="seccion" />
+                <ScalarProperty Name="ID_detalle" ColumnName="ID_detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendedores">
+            <EntityTypeMapping TypeName="DLI_SurveyModel.Vendedores">
+              <MappingFragment StoreEntitySet="Vendedores">
+                <ScalarProperty Name="nomSAP_vendedor" ColumnName="nomSAP_vendedor" />
+                <ScalarProperty Name="idSAP_vendedor" ColumnName="idSAP_vendedor" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="ID_vendedor" ColumnName="ID_vendedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
