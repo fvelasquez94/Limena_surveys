@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Storeslatlong</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>CARDCODE</td>
+                <td>STORE</td>
+                <td>LAT</td>
+                <td>LONG</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.lista)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.store</td>
+                    <td>@item.lat</td>
+                    <td>@item.lng</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

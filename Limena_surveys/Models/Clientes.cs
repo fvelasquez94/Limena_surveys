@@ -19,6 +19,6 @@ namespace Limena_surveys.Models
         public string nomSAP_cliente { get; set; }
         public string idSAP_vendedor { get; set; }
         public string nomSAP_vendedor { get; set; }
-        public Nullable<int> estado { get; set; }
+        public int estado { get; set; }
     }
 }

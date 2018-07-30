@@ -37,6 +37,7 @@
           <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="idSAP_vendedor" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nomSAP_vendedor" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="DLI_SurveyModelStoreContainer">
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
@@ -70,7 +71,7 @@
           <Property Name="ID_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="seccion" Type="Int32" />
           <Property Name="seccion_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ID_item" Type="String" />
+          <Property Name="ID_item" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="descripcion_item" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="value_item_chk" Type="Boolean" />
           <Property Name="idSAP_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -84,6 +85,7 @@
           <Property Name="contrasena" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="idSAP_vendedor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="nomSAP_vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -119,6 +121,7 @@
           <EntitySetMapping Name="Vendedores">
             <EntityTypeMapping TypeName="DLI_SurveyModel.Vendedores">
               <MappingFragment StoreEntitySet="Vendedores">
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="nomSAP_vendedor" ColumnName="nomSAP_vendedor" />
                 <ScalarProperty Name="idSAP_vendedor" ColumnName="idSAP_vendedor" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />

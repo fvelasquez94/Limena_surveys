@@ -19,5 +19,6 @@ namespace Limena_surveys.Models
         public string contrasena { get; set; }
         public string idSAP_vendedor { get; set; }
         public string nomSAP_vendedor { get; set; }
+        public string telefono { get; set; }
     }
 }

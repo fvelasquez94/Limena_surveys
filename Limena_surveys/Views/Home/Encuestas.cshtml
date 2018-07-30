@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewBag.Title = "Distribuidora Limena - Cpanel";
+}
+<!-- PAGE CONTENT-->
+<br /><br /><br />
+<div class="page-content--bgf7">
+    <!-- WELCOME-->
+    <section class="welcome p-t-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="title-4">
+                        Encuestas de @ViewBag.nomvendedor
+                        <a href="@Url.Action("Cpanel", "Home")" class="btn btn-outline-secondary text-right">
+                            <i class="fa fa-arrow-circle-o-left"></i>&nbsp; Volver
+                        </a>
+                    
+
+                    </h1>
+                    <hr class="line-seprate">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END WELCOME-->
+    <!-- STATISTIC-->
+    <section class="statistic statistic2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="statistic__item statistic__item--green">
+                        <h2 class="number">@ViewBag.clientesE</h2>
+                        <span class="desc">Clientes encuestados</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-account-o"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="statistic__item statistic__item--red">
+                        <h2 class="number">@ViewBag.clientesP</h2>
+                        <span class="desc">Clientes pendientes</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-account-o"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="statistic__item statistic__item--blue">
+                        <h2 class="number">@ViewBag.totalCli</h2>
+                        <span class="desc">Total de clientes</span>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="statistic__item statistic__item--orange">
+                        <h2 class="number">@ViewBag.clienteCe</h2>
+                        <span class="desc">Cliente cerrado</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-airplane-off"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="statistic__item statistic__item--orange">
+                        <h2 class="number">@ViewBag.clienteNoVisita</h2>
+                        <span class="desc">Cliente no se visita</span>
+                        <div class="icon">
+                            <i class="zmdi zmdi-crop-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END STATISTIC-->
+    <!-- STATISTIC CHART-->
+    <!-- END STATISTIC CHART-->
+    <!-- DATA TABLE-->
+    <section class="p-t-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title-5 m-b-35">Lista de encuestas</h3>
+                    <div class="table-data__tool">
+                        <div class="table-data__tool-left">
+
+                        </div>
+                        <div class="table-data__tool-right">
+                        </div>
+                    </div>
+                    <div class="table-responsive table-responsive-data2">
+                        <table class="table table-data2 table-striped table-bordered" id="clientestable">
+                            <thead>
+                                <tr>
+                                    <th>ID SAP</th>
+                                    <th>Cliente</th>
+                                    <th>Estado</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var encuesta in ViewBag.lista)
+                                {
+                                    <tr class="tr-shadow">
+
+                                        <td>@encuesta.Value</td>
+                                        <td class="desc">@encuesta.Text</td>
+
+                                        <td>
+                                            @if (encuesta.pendiente == 0)
+                                            {
+                                            <span class="status--process">Finalizada</span>
+                                            }
+                                            else if(encuesta.pendiente==2){
+                                                <span class="status--process">Cliente cerrado</span>
+                                            }else if(encuesta.pendiente==3){
+                                                <span class="status--process">Cliente no se visita</span>
+                                            }else {
+                                                <span class="status--denied">Pendiente</span>
+                                            }
+                                        
+                                        </td>
+
+                                        <td>
+                                            @if (encuesta.pendiente == 0) 
+                                            {                                                                            
+                                                <div class="table-data-feature">
+                                                
+                                                    <a class="item" data-toggle="tooltip" data-placement="top" title="Ver detalle de encuesta" href="@Url.Action("ImpEncuestas", "Home",new { id= encuesta.Value})"><i class="zmdi zmdi-more"></i></a>
+
+                                            </div>
+                                            }
+                                            else {
+                                            }
+                                            
+            
+                                        </td>
+                                    </tr>
+                                }
+                              
+
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END DATA TABLE-->
+    <!-- COPYRIGHT-->
+    <section class="p-t-60 p-b-20">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2018 Distribuidora Limena Inc. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END COPYRIGHT-->
+</div>

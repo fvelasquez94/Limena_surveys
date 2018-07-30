@@ -32,10 +32,10 @@
         <!-- END HEADER MOBILE-->
         <!-- MENU SIDEBAR-->
         @*<div class="logo">
-            <a href="#">
-                <img src="~/Content/images/icon/logolimena2.png" alt="Cool Admin" />
-            </a>
-        </div>*@
+                <a href="#">
+                    <img src="~/Content/images/icon/logolimena2.png" alt="Cool Admin" />
+                </a>
+            </div>*@
         <!-- END MENU SIDEBAR-->
         <!-- HEADER DESKTOP-->
         <!-- HEADER DESKTOP-->
@@ -70,20 +70,24 @@
 </html>
 @if (ViewBag.Title == "Distribuidora Limena - Survey")
 {
+    if (Session["idSAP_Vendedor"] == null)
+    {
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+        <script type="text/javascript">
+            $(document).ready(function () {
 
-            $("#staticModal").modal('show');
-        });
-    </script>
+                $("#staticModal").modal('show');
+            });
+        </script>
+    }
+
 
 
     <script type="text/javascript">
         $("#form").submit(function (e) {
 
             e.preventDefault();
-            
+
         //PRIMERO LLAMAMOS LA FUNCION LOGIN
         var email = $('#usuariocorreo').val();
         var password = $('#password').val();
@@ -96,9 +100,11 @@
             dataType: "json",
             success: function (data) {
             if (data.success) {
-               
-                console.log("Login success")
 
+                console.log("Login success")
+                if (data.cpanel == "si") {
+                    window.location.href = '@Url.Action("Cpanel", "Home")';
+                }
                 $("#select_customers").html("");
                 $.each($.parseJSON(data.lstclientes), function (i, cliente) {
                     if (cliente.enabled > 0) {
@@ -117,9 +123,9 @@
             } else {
 
                 console.log("Username or Password wrong");
-         
+
                 alert("Usuario o contrasena incorrectos");
-               
+
             }
 
 
@@ -149,114 +155,160 @@
             $("#send_demo").click(function (e) {
                 e.preventDefault();
                 //var now = new Date();
-               
+
                 //console.log(now.toLocaleString());
                 //console.log(now.toLocaleString("en-US", { hour12: true }));
-                //COMPROBAMOS QUE TODO ESTE LLENO
-                var conteo = 0;
-                $.each($('input.form-check-input[data-seccion="1"]'), function () {
 
-                    conteo += $(this).prop("checked") ? 1 : 0;
+                //VALIDAMOS EL ESTADO DEL CLIENTE, SI SELECCIONO NO APLICA LA APLICACION SIGUE NORMAL, DE LO CONTRARIO SE GUARDARA SIN VALIDAR LO ESCRITO
+                var id_seleccion = $("#select_estado").val();
 
+                if (id_seleccion == "0") {
+                    //COMPROBAMOS QUE TODO ESTE LLENO
+                    var conteo = 0;
+                    $.each($('input.form-check-input[data-seccion="1"]'), function () {
 
-
-                });
-
-
-                if (conteo > 0) {
-
-                    var id_seleccion = $("#select_size").val();
-
-                    if (id_seleccion == "0") {
-                        alert("Selecciona una opcion valida del Punto 2")
-                    } else {
-                        var conteo2 = 0;
-                        $.each($('input.form-check-input[data-seccion="3"]'), function () {
-
-                            conteo2 += $(this).prop("checked") ? 1 : 0;
-
-                        });
+                        conteo += $(this).prop("checked") ? 1 : 0;
 
 
-                        if (conteo2 > 0) {
-                            $("#modal_demoform_saving").modal('show');
-                            var id_cliente = "";
-                            id_cliente = $("#select_customers").val();
+
+                    });
 
 
-                            var objects = [];
+                    if (conteo > 0) {
 
-                            $.each($('input.form-check-input'), function () {
+                        var id_seleccion = $("#select_size").val();
 
-                                //alert("ID:" + $(this).attr('id') + "value: " + $(this).val());
+                        if (id_seleccion == "0") {
+                            alert("Selecciona una opcion valida del Punto 2")
+                        } else {
+                            var conteo2 = 0;
+                            $.each($('input.form-check-input[data-seccion="3"]'), function () {
 
+                                conteo2 += $(this).prop("checked") ? 1 : 0;
+
+                            });
+
+
+                            if (conteo2 > 0) {
+                                $("#modal_demoform_saving").modal('show');
+                                var id_cliente = "";
+                                id_cliente = $("#select_customers").val();
+
+
+                                var objects = [];
+
+                                $.each($('input.form-check-input'), function () {
+
+                                    //alert("ID:" + $(this).attr('id') + "value: " + $(this).val());
+
+                                    objects.push({
+                                        id_item: $(this).attr('id'),
+                                        seccion: $(this).attr("data-seccion"),
+                                        seccion_descripcion: $(this).attr("data-secciondescripcion"),
+                                        descripcion_item: $(this).attr("data-descripcionitem"),
+                                        value_item_onlyforchk: $(this).prop("checked") ? true : false,
+                                        idSAP_cliente: id_cliente
+                                    });
+
+
+                                });
+
+                                //PARA SELECT SIZE
                                 objects.push({
-                                    id_item: $(this).attr('id'),
-                                    seccion: $(this).attr("data-seccion"),
-                                    seccion_descripcion: $(this).attr("data-secciondescripcion"),
-                                    descripcion_item: $(this).attr("data-descripcionitem"),
-                                    value_item_onlyforchk: $(this).prop("checked") ? true : false,
+                                    id_item: $("#select_size").val(),
+                                    seccion: "2",
+                                    seccion_descripcion: "Opcion unica",
+                                    descripcion_item: $("#select_size option:selected").text(),
+                                    value_item_onlyforchk: 0,
                                     idSAP_cliente: id_cliente
                                 });
 
 
-                            });
 
-                            //PARA SELECT SIZE
-                            objects.push({
-                                id_item: $("#select_size").val(),
-                                seccion: "2",
-                                seccion_descripcion: "Opcion unica",
-                                descripcion_item: $("#select_size option:selected").text(),
-                                value_item_onlyforchk: 0,
-                                idSAP_cliente: id_cliente
-                            });
+                                //objects.push({
+                                //    id: "999999999",
+                                //    text: now.toLocaleString("en-US", { hour12: true })
+                                //});
 
+                                $.ajax({
+                                    url: '/Home/Enviar_datos',
+                                    type: 'POST',
+                                    data: JSON.stringify(objects),
+                                    contentType: 'application/json; charset=utf-8',
+                                    complete: function () {
 
+                                    },
+                                    success: function (result) {
+                                        alert("Datos enviados");
+                                        window.location.reload(true);
 
-                            //objects.push({
-                            //    id: "999999999",
-                            //    text: now.toLocaleString("en-US", { hour12: true })
-                            //});
-
-                            $.ajax({
-                                url: '/Home/Enviar_datos',
-                                type: 'POST',
-                                data: JSON.stringify(objects),
-                                contentType: 'application/json; charset=utf-8',
-                                complete: function () {
-
-                                },
-                                success: function (result) {
-                                    alert("Datos enviados");
-                                    window.location.reload(true);
-
-                                },
-                                error: function (result) {
-                                    alert("Ocurrio un error");
-                                    window.location.reload(true);
-                                }
-                            });
+                                    },
+                                    error: function (result) {
+                                        alert("Ocurrio un error");
+                                        window.location.reload(true);
+                                    }
+                                });
 
 
-                        } else {
-                            alert("Selecciona al menos una opcion del Punto 3")
+                            } else {
+                                alert("Selecciona al menos una opcion del Punto 3")
+
+                            }
+
 
                         }
 
+                    } else {
+                        alert("Selecciona al menos una opcion del Punto 1")
 
                     }
-
                 } else {
-                    alert("Selecciona al menos una opcion del Punto 1")
+                    //SI SELECCIONO UN CASO ESPECIAL DE CLIENTE CERRADO O CLIENTE NO SE VISITA
+                    $("#modal_demoform_saving").modal('show');
+                    var id_cliente = "";
+                    id_cliente = $("#select_customers").val();
+
+
+                    var objects = [];
+                    //PARA SELECT ESTADO
+                    objects.push({
+                        id_item: $("#select_estado").val(),
+                        seccion: "4",
+                        seccion_descripcion: "Opcion caso especial",
+                        descripcion_item: $("#select_estado option:selected").text(),
+                        value_item_onlyforchk: 0,
+                        idSAP_cliente: id_cliente
+                    });
+
+
+
+                    //objects.push({
+                    //    id: "999999999",
+                    //    text: now.toLocaleString("en-US", { hour12: true })
+                    //});
+
+                    $.ajax({
+                        url: '/Home/Enviar_datos',
+                        type: 'POST',
+                        data: JSON.stringify(objects),
+                        contentType: 'application/json; charset=utf-8',
+                        complete: function () {
+
+                        },
+                        success: function (result) {
+                            alert("Datos enviados");
+                            window.location.reload(true);
+
+                        },
+                        error: function (result) {
+                            alert("Ocurrio un error");
+                            window.location.reload(true);
+                        }
+                    });
 
                 }
 
-
-
-
-
-
+     
             }
             );
         });
@@ -276,6 +328,210 @@
         });
 
     </script>
+
 }
 
+<script>
 
+    $(document).ready(function () {
+        $('#clientestable').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2]
+                    }
+                }
+
+            ],
+            language: {
+                search: '<div class="input-group"><span class="input-group-addon"><span class="fa fa-search"></span></span>',
+                searchPlaceholder: 'Busca aqui',
+                lengthMenu : "Mostrando _MENU_ registros por pagina",
+             
+                
+        }
+
+        });
+
+    });
+
+    //$(document).ready(function () {
+    //    $('#clientestable').DataTable();
+    //});
+    
+</script>
+
+<script>
+    function filter() {
+        var id = $("#filterCpanel").val();
+
+
+        if (id == "0") {
+
+        var url = '@Url.Action("Cpanel", "Home")';
+
+        var newurl = url;
+
+        //window.location.href = newurl;
+        } else {
+
+        var url = '@Url.Action("Cpanel", "Home", new {id = "START"})';
+
+
+        url = url.replace('START', id);
+
+        var newurl = url;
+
+        window.location.href = newurl;
+        }
+
+
+        //window.location.href = "/Home/Main/startdate='" + startdate.toLocaleDateString() + "', finishdate='" + finishdate.toLocaleDateString() + "'";
+
+    }
+</script>
+@if (ViewBag.Title == "Distribuidora Limena - Cpanel")
+{
+    <script>
+        $(document).ready(function () {
+        try {
+
+            // Percent Chart 2
+            var ctx = document.getElementById("percent-chart2");
+            if (ctx) {
+                ctx.height = 209;
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [
+                            {
+                                label: "My First dataset",
+                                data: [@ViewBag.clientesE, @ViewBag.clientesP],
+                                backgroundColor: [
+                                    '#00b5e9',
+                                    '#fa4251'
+                                ],
+                                hoverBackgroundColor: [
+                                    '#00b5e9',
+                                    '#fa4251'
+                                ],
+                                borderWidth: [
+                                    0, 0
+                                ],
+                                hoverBorderColor: [
+                                    'transparent',
+                                    'transparent'
+                                ]
+                            }
+                        ],
+                        labels: [
+                            'Finalizadas',
+                            'Pendientes'
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        cutoutPercentage: 87,
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        },
+                        legend: {
+                            display: false,
+                            position: 'bottom',
+                            labels: {
+                                fontSize: 14,
+                                fontFamily: "Poppins,sans-serif"
+                            }
+
+                        },
+                        tooltips: {
+                            titleFontFamily: "Poppins",
+                            xPadding: 15,
+                            yPadding: 10,
+                            caretPadding: 0,
+                            bodyFontSize: 16,
+                        }
+                    }
+                });
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+        });
+    </script>
+
+    <script>
+
+        try {
+            //bar chart
+            var ctx = document.getElementById("barChart");
+            if (ctx) {
+                ctx.height = 150;
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    defaultFontFamily: 'Poppins',
+                    data: {
+                        labels: [@Html.Raw(ViewBag.listIDV)],
+                        datasets: [
+                            {
+                                label: "Finalizadas",
+                                data: [@Html.Raw(ViewBag.FinalizadasGrafico)],
+                                borderColor: "rgba(0, 123, 255, 0.9)",
+                                borderWidth: "0",
+                                backgroundColor: "rgba(0, 123, 255, 0.5)",
+                                fontFamily: "Poppins"
+                            },
+                            {
+                                label: "Pendientes",
+                                data: [@Html.Raw(ViewBag.PendientesGrafico)],
+                                borderColor: "rgba(0,0,0,0.09)",
+                                borderWidth: "0",
+                                backgroundColor: "rgba(0,0,0,0.07)",
+                                fontFamily: "Poppins"
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                fontFamily: 'Poppins'
+                            }
+
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    fontFamily: "Poppins"
+
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    fontFamily: "Poppins"
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    </script>
+}

@@ -64,7 +64,7 @@ textarea:focus {
 }
 
 input, textarea {
-    border: none;
+    
 }
 
 button {
@@ -215,6 +215,11 @@ strong {
 /* ----- Links ----- */
 a {
     display: inline-block;
+}
+
+option:disabled {
+    color: lightblue;
+    text-decoration: line-through;
 }
 
 a:hover,
@@ -4340,8 +4345,9 @@ section {
 }
 
 .table-data {
-    height: 472px;
+    
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .table-data thead tr td {
@@ -4361,7 +4367,7 @@ section {
 }
 
 .table-data .table tr td:last-child {
-    padding-right: 24px;
+    padding-right: 4px;
 }
 
 .table-data tbody tr:hover td .more {
@@ -4484,7 +4490,7 @@ section {
     border: none;
     font-weight: 600;
     vertical-align: top;
-    padding: 15px 40px;
+    padding: 15px 4px;
     padding-right: 10px;
 }
 
@@ -4527,7 +4533,7 @@ section {
     -webkit-border-bottom-right-radius: 3px;
     -moz-border-radius-bottomright: 3px;
     border-bottom-right-radius: 3px;
-    padding-right: 35px;
+    padding-right: 5px;
 }
 
 .table-data2.table tbody td {
@@ -4535,7 +4541,7 @@ section {
     color: #808080;
     vertical-align: middle;
     padding: 25px 40px;
-    padding-right: 10px;
+    padding-right: 5px;
     border: none;
 }
 
@@ -4686,7 +4692,7 @@ section {
 
 .table-data3 thead tr th:last-child {
     text-align: right;
-    padding-right: 50px;
+    padding-right: 10px;
 }
 
 .table-data3 tbody tr td:last-child {
@@ -4716,7 +4722,7 @@ section {
     background: #fff;
     font-size: 14px;
     color: #808080;
-    padding: 12px 40px;
+    padding: 12px 10px;
     padding-right: 10px;
 }
 

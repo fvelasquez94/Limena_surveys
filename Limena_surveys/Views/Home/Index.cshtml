@@ -22,8 +22,22 @@
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <select name="select" id="select_customers" class="form-control">
+                                            @if (ViewBag.clientes == null)
+                                            {
 
-
+                                            }
+                                            else {
+                                                foreach (var item in ViewBag.clientes) {
+                                                    if (item.enabled > 0)
+                                                    {
+                                                        <option value="@item.Value">@item.Text</option>
+                                                    }
+                                                    else {
+                                                        <option disabled='disabled' value="@item.Value">@item.Text</option>
+                                                    }
+                                                    
+                                                }
+                                            }
                                         </select>
                                     </div>
                                 </div> 
@@ -34,73 +48,73 @@
                                 <div class="row form-group">
                                     <strong class="col-lg-12">Punto 1: Servicios Disponibles (Opción multiple).</strong>
                                     <p class="col-lg-12">De acuerdo con las secciones o departamentos que actualmente tiene esta tienda, a continuación, seleccione cuáles de las siguientes categorías se encuentran disponibles:</p>
-                                    
+
                                     <div class="col col-md-12">
                                         <br />
                                         <div class="form-check">
                                             <div class="checkbox">
                                                 <label for="checkbox1" class="form-check-label ">
-                                                    <input type="checkbox" id="chk1" name="checkbox1" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Grocery – Dry product" class="form-check-input">Grocery – Dry product
+                                                    <input type="checkbox" id="chk1" name="checkbox1" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Grocery – Dry product" class="form-check-input">Grocery – Dry product
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox2" class="form-check-label ">
-                                                    <input type="checkbox" id="chk2" name="checkbox2" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Dairy Section" class="form-check-input">Dairy Section
+                                                    <input type="checkbox" id="chk2" name="checkbox2" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Dairy Section" class="form-check-input">Dairy Section
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox3" class="form-check-label ">
-                                                    <input type="checkbox" id="chk3" name="checkbox3" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Frozen Section" class="form-check-input">Frozen Section
+                                                    <input type="checkbox" id="chk3" name="checkbox3" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Frozen Section" class="form-check-input">Frozen Section
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox4" class="form-check-label ">
-                                                    <input type="checkbox" id="chk4" name="checkbox4" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Produce" class="form-check-input">Produce
+                                                    <input type="checkbox" id="chk4" name="checkbox4" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Produce" class="form-check-input">Produce
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox5" class="form-check-label ">
-                                                    <input type="checkbox" id="chk5" name="checkbox5"  data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Meat Department" class="form-check-input">Meat Department
+                                                    <input type="checkbox" id="chk5" name="checkbox5" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Meat Department" class="form-check-input">Meat Department
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox6" class="form-check-label ">
-                                                    <input type="checkbox" id="chk6" name="checkbox6"  data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Restaurant" class="form-check-input">Restaurant
+                                                    <input type="checkbox" id="chk6" name="checkbox6" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Restaurant" class="form-check-input">Restaurant
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox7" class="form-check-label ">
-                                                    <input type="checkbox" id="chk7" name="checkbox7" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Money Services" class="form-check-input">Money Services
+                                                    <input type="checkbox" id="chk7" name="checkbox7" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Money Services" class="form-check-input">Money Services
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox8" class="form-check-label ">
-                                                    <input type="checkbox" id="chk8" name="checkbox8" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="OTC (Medicinas)" class="form-check-input">OTC (Medicinas)
+                                                    <input type="checkbox" id="chk8" name="checkbox8" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="OTC (Medicinas)" class="form-check-input">OTC (Medicinas)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox9" class="form-check-label ">
-                                                    <input type="checkbox" id="chk9" name="checkbox9" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Kitchenware (Utensilios de cocina)" class="form-check-input">Kitchenware (Utensilios de cocina)
+                                                    <input type="checkbox" id="chk9" name="checkbox9" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Kitchenware (Utensilios de cocina)" class="form-check-input">Kitchenware (Utensilios de cocina)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox10" class="form-check-label ">
-                                                    <input type="checkbox" id="chk10" name="checkbox10" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Ethnic Souvenirs"  class="form-check-input">Ethnic Souvenirs
+                                                    <input type="checkbox" id="chk10" name="checkbox10" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Ethnic Souvenirs" class="form-check-input">Ethnic Souvenirs
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox11" class="form-check-label ">
-                                                    <input type="checkbox" id="chk11" name="checkbox11" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Clothing" class="form-check-input">Clothing
+                                                    <input type="checkbox" id="chk11" name="checkbox11" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Clothing" class="form-check-input">Clothing
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox12" class="form-check-label ">
-                                                    <input type="checkbox" id="chk12" name="checkbox12" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Jewelry" class="form-check-input">Jewelry
+                                                    <input type="checkbox" id="chk12" name="checkbox12" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Jewelry" class="form-check-input">Jewelry
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox13" class="form-check-label ">
-                                                    <input type="checkbox" id="chk13" name="checkbox13" data-seccion="1" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Cellphone store"  class="form-check-input">Cellphone store
+                                                    <input type="checkbox" id="chk13" name="checkbox13" data-seccion="1" data-secciondescripcion="Opcion multiple" data-descripcionitem="Cellphone store" class="form-check-input">Cellphone store
                                                 </label>
                                             </div>
                                         </div>
@@ -110,11 +124,11 @@
                                 <div class="row form-group">
                                     <strong class="col-lg-12">Punto 2: Tamaño de la Tienda (Selección única).</strong>
                                     <p class="col-lg-12">Con base en los siguientes parámetros y ejemplos de tamaño, clasifique esta tienda en uno de los rangos disponibles:</p>
-                                    
+
                                     <div class="col-12 col-md-9">
                                         <br />
                                         <select name="select" id="select_size" class="form-control">
-                                            <option value="0">Seleccione...</option>
+                                            <option value="0">Seleccione un tamaño</option>
                                             <option value="ss1">- 3.000 ft </option>
                                             <option value="ss2">+ 3.000 ft</option>
                                             <option value="ss3">+ 5.000 ft</option>
@@ -134,59 +148,73 @@
                                         <div class="form-check">
                                             <div class="checkbox">
                                                 <label for="checkbox14" class="form-check-label ">
-                                                    <input type="checkbox" id="chk14" name="checkbox14" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="El Salvador" class="form-check-input">El Salvador
+                                                    <input type="checkbox" id="chk14" name="checkbox14" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="El Salvador" class="form-check-input">El Salvador
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox15" class="form-check-label ">
-                                                    <input type="checkbox" id="chk15" name="checkbox15" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Guatemala" class="form-check-input">Guatemala
+                                                    <input type="checkbox" id="chk15" name="checkbox15" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Guatemala" class="form-check-input">Guatemala
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox16" class="form-check-label ">
-                                                    <input type="checkbox" id="chk16" name="checkbox16" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Costa Rica" class="form-check-input">Costa Rica
+                                                    <input type="checkbox" id="chk16" name="checkbox16" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Costa Rica" class="form-check-input">Costa Rica
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox17" class="form-check-label ">
-                                                    <input type="checkbox" id="chk17" name="checkbox17" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Colombia"  class="form-check-input">Mexico
+                                                    <input type="checkbox" id="chk17" name="checkbox17" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Colombia" class="form-check-input">Mexico
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox18" class="form-check-label ">
-                                                    <input type="checkbox" id="chk18" name="checkbox18" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Colombia" class="form-check-input">Colombia
+                                                    <input type="checkbox" id="chk18" name="checkbox18" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Colombia" class="form-check-input">Colombia
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox19" class="form-check-label ">
-                                                    <input type="checkbox" id="chk19" name="checkbox19" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Peru" class="form-check-input">Peru
+                                                    <input type="checkbox" id="chk19" name="checkbox19" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Peru" class="form-check-input">Peru
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox20" class="form-check-label ">
-                                                    <input type="checkbox" id="chk20" name="checkbox20"  data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Venezuela" class="form-check-input">Venezuela
+                                                    <input type="checkbox" id="chk20" name="checkbox20" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Venezuela" class="form-check-input">Venezuela
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox21" class="form-check-label ">
-                                                    <input type="checkbox" id="chk21" name="checkbox21" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Cuba" class="form-check-input">Cuba
+                                                    <input type="checkbox" id="chk21" name="checkbox21" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Cuba" class="form-check-input">Cuba
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox22" class="form-check-label ">
-                                                    <input type="checkbox" id="chk22" name="checkbox22" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Puerto Tico" class="form-check-input">Puerto Tico
+                                                    <input type="checkbox" id="chk22" name="checkbox22" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Puerto Tico" class="form-check-input">Puerto Rico
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label for="checkbox23" class="form-check-label ">
-                                                    <input type="checkbox" id="chk23" name="checkbox23" data-seccion="3" data-secciondescripcion="Opcion multiple"  data-descripcionitem="Honduras" class="form-check-input">Honduras
+                                                    <input type="checkbox" id="chk23" name="checkbox23" data-seccion="3" data-secciondescripcion="Opcion multiple" data-descripcionitem="Honduras" class="form-check-input">Honduras
                                                 </label>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row form-group">
+                                    <strong class="col-lg-12" style="color:red">SOLO USAR EN CIERTOS CASOS.</strong>
+                                    <p class="col-lg-12">Esta opcion esta disponible y solo debe utilizarse en caso que el Cliente cumpla las siguientes condiciones: Cliente cerrado o Cliente no se visita, al hacer uso de esta opcion, no se guardaran los datos realizados en la encuesta. De otro modo, dejar la opcion por defecto "No aplica".</p>
 
+                                    <div class="col-12 col-md-9">
+                                        <br />
+                                        <select name="select" id="select_estado" class="form-control">
+                                            <option value="0">No aplica</option>
+                                            <option value="c2">Cerrado</option>
+                                            <option value="c3">No se visita</option>
+
+                                        </select>
+                                        <br />
+                                    </div>
+                                </div>
 
                             </div>
                             <div class="card-footer">
