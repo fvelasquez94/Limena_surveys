@@ -336,6 +336,7 @@
     $(document).ready(function () {
         $('#clientestable').DataTable({
             dom: 'lBfrtip',
+            bPaginate: false,
             buttons: [
                 {
                     extend: 'excelHtml5',
@@ -414,13 +415,13 @@
                         datasets: [
                             {
                                 label: "My First dataset",
-                                data: [@ViewBag.clientesE, @ViewBag.clientesP],
+                                data: [@ViewBag.clientesEg2, @ViewBag.clientesP],
                                 backgroundColor: [
-                                    '#00b5e9',
+                                    '#28a745',
                                     '#fa4251'
                                 ],
                                 hoverBackgroundColor: [
-                                    '#00b5e9',
+                                    '#28a745',
                                     '#fa4251'
                                 ],
                                 borderWidth: [
@@ -487,14 +488,22 @@
                             {
                                 label: "Finalizadas",
                                 data: [@Html.Raw(ViewBag.FinalizadasGrafico)],
-                                borderColor: "rgba(0, 123, 255, 0.9)",
+                                borderColor: "rgba(0,0,0,0.09)",
                                 borderWidth: "0",
-                                backgroundColor: "rgba(0, 123, 255, 0.5)",
+                                backgroundColor: "rgba(81, 213, 101, 0.7)",
                                 fontFamily: "Poppins"
                             },
                             {
                                 label: "Pendientes",
                                 data: [@Html.Raw(ViewBag.PendientesGrafico)],
+                                borderColor: "rgba(0,0,0,0.09)",
+                                borderWidth: "0",
+                                backgroundColor: "rgba(215, 40, 40, 0.9)",
+                                fontFamily: "Poppins"
+                            },
+                            {
+                                label: "Total",
+                                data: [@Html.Raw(ViewBag.TotalGrafico)],
                                 borderColor: "rgba(0,0,0,0.09)",
                                 borderWidth: "0",
                                 backgroundColor: "rgba(0,0,0,0.07)",

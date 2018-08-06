@@ -102,6 +102,7 @@ namespace Limena_surveys.Controllers
             public string Vendedor { get; set; }
             public int countF { get; set; }
             public int countP { get; set; }
+            public int countT { get; set; }
         }
 
         public ActionResult Cpanel()
@@ -112,6 +113,7 @@ namespace Limena_surveys.Controllers
             }
             else
             {
+
                 //SECCION Tarjetas de estado
                 var nclientes = (from b in DLIPRO.OCRDs where (b.CardType == "C" && b.validFor == "Y" && b.CardCode != "F%" && b.CardCode != "41%" && b.CardCode != "31%") select b).ToList();
                 if (nclientes == null)
@@ -139,8 +141,12 @@ namespace Limena_surveys.Controllers
                 int nCerrado = (from i in db.Clientes where (i.estado == 2) select i).Count();
                 int nNoVisita = (from i in db.Clientes where (i.estado == 3) select i).Count();
 
+                
                 ViewBag.clienteCe = nCerrado;
                 ViewBag.clienteNoVisita = nNoVisita;
+
+                ViewBag.clientesEg2 = ViewBag.clientesE + nCerrado + nNoVisita;
+                ViewBag.clientesP = ViewBag.clientesP - nCerrado - nNoVisita;
                 // FIN SECCION
 
                 //SECCION Graficos
@@ -178,13 +184,15 @@ namespace Limena_surveys.Controllers
                     int countTotal = (from f in DLIPRO.OCRDs where (f.SlpCode == id && f.CardType == "C" && f.validFor == "Y" && f.CardCode != "F%" && f.CardCode != "41%" && f.CardCode != "31%") select f).Count();
                     int finalizadas = (from g in db.Clientes where (g.idSAP_vendedor == stats.IDSAP) select g).Count();
 
-                    stats.countF = finalizadas;
-                    stats.countP = countTotal;
+                    stats.countF = finalizadas ;
+                    stats.countP = countTotal - finalizadas;
+                    stats.countT = countTotal;
 
                 }
 
                 ViewBag.FinalizadasGrafico = String.Join(",", statsQuery.Select(o => o.countF.ToString()).ToArray());
                 ViewBag.PendientesGrafico = String.Join(",", statsQuery.Select(o => o.countP.ToString()).ToArray());
+                ViewBag.TotalGrafico = String.Join(",", statsQuery.Select(o => o.countT.ToString()).ToArray());
                 //lista de vendedores
 
                 //porcentaje
@@ -306,13 +314,15 @@ namespace Limena_surveys.Controllers
 
                     ViewBag.totalCli = countTotal;
                     ViewBag.clientesE = finalizadas;
-                    ViewBag.clientesP = countTotal - finalizadas;
+                    
 
                     int nCerrado = (from i in db.Clientes where (i.estado == 2 && i.idSAP_vendedor==id.ToString()) select i).Count();
                     int nNoVisita = (from i in db.Clientes where (i.estado == 3 && i.idSAP_vendedor == id.ToString()) select i).Count();
 
                     ViewBag.clienteCe = nCerrado;
                     ViewBag.clienteNoVisita = nNoVisita;
+
+                    ViewBag.clientesP = countTotal - finalizadas - nCerrado - nNoVisita;
 
                     ViewBag.lista = clientes;
                     //ViewBag.vendedores = (from v in db.Vendedores select v).ToList();
@@ -681,6 +691,8 @@ namespace Limena_surveys.Controllers
 
                     db.Clientes.Add(cli_nuevo);
                     db.SaveChanges();
+
+                    return Json(new { Result = "Success" });
                 }
                 catch (Exception ex) {
                     
