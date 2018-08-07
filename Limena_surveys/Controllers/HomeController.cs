@@ -265,7 +265,7 @@ namespace Limena_surveys.Controllers
                 else
                 {
                     var clientes = (from b in DLIPRO.OCRDs where (b.SlpCode == id && b.CardType == "C" && b.validFor == "Y" && b.CardCode != "F%" && b.CardCode != "41%" && b.CardCode != "31%") select new lsClientes_cpanel { Value = b.CardCode, Text = b.CardName, pendiente = 1 }).OrderBy(b => b.Text).ToList();
-
+                   
                     foreach (var item in clientes)
                     {
 
